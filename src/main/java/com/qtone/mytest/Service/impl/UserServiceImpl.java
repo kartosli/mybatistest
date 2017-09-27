@@ -5,6 +5,8 @@ import com.qtone.mytest.Dao.impl.UserDaoImpl;
 import com.qtone.mytest.Model.User;
 import com.qtone.mytest.Service.IUserService;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/9/22.
  */
@@ -21,6 +23,10 @@ public class UserServiceImpl  implements IUserService{
     }
     public void addUser(User user){
         userDao.addUser(user);
+    }
+
+    public List<User> findAllUser() {
+        return userDao.findAllUser();
     }
 
 }

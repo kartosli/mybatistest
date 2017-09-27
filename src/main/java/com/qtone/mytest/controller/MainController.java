@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class MainController {
     private IUserService service = new UserServiceImpl();
@@ -25,10 +27,17 @@ public class MainController {
         return "nice";
     }
 
-    @RequestMapping(value ="/toJson")
+    @RequestMapping(value ="/toJsonXml")
     @ResponseBody
-    public User toJson(User user){
+    public User toJsonXml(User user){
 //        service.addUser(user); //一起测试了
         return service.findUserById(2);
+    }
+
+    @RequestMapping(value ="/toJson")
+    @ResponseBody
+    public List<User> toJson(User user){
+//        service.addUser(user); //一起测试了
+        return service.findAllUser();
     }
 }
