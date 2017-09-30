@@ -29,4 +29,8 @@ public class UserServiceImpl  implements IUserService{
         return userDao.findAllUser();
     }
 
+    public int getDataCount() {
+        return userDao.getDataCount();
+    }
+
 }

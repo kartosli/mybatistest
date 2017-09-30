@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -39,5 +41,16 @@ public class MainController {
     public List<User> toJson(User user){
 //        service.addUser(user); //一起测试了
         return service.findAllUser();
+    }
+
+
+    @RequestMapping(value ="/toJsonCount")
+    @ResponseBody
+    public Map toJsonCount(User user){
+//        service.addUser(user); //一起测试了
+        int rescount =  service.getDataCount();
+        Map res = new HashMap();
+        res.put("count",rescount);
+        return res;
     }
 }

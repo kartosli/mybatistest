@@ -11,4 +11,5 @@ public interface IUserDao {
     public User findUserById(int id); //查询
     public void addUser(User user); //添加
     public List<User> findAllUser();//查找所有用户
+    public int getDataCount();
 }

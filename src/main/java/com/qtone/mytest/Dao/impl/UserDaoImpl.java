@@ -2,7 +2,9 @@ package com.qtone.mytest.Dao.impl;
 
 import com.qtone.mytest.Dao.IUserDao;
 import com.qtone.mytest.Mapper.UserMapper;
+import com.qtone.mytest.Mapper.UserTestMapper;
 import com.qtone.mytest.Model.User;
+import com.qtone.mytest.Model.UserTestExample;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -42,4 +44,15 @@ public class UserDaoImpl implements IUserDao{
     public List<User> findAllUser() {
         return mapper.getAllUsers();
     }
+
+    public int getDataCount() {
+        UserTestMapper uTmapper = session.getMapper(UserTestMapper.class);
+
+        UserTestExample example = new UserTestExample();
+        UserTestExample.Criteria criteria = example.createCriteria();
+        int count = uTmapper.countByExample(example);
+        return count;
+    }
+
+
 }

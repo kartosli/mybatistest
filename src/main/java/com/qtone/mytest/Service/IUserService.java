@@ -12,5 +12,5 @@ public interface IUserService {
     public User findUserById(int id);
     public void addUser(User user);
     public List<User> findAllUser();
-
+    public int getDataCount();
 }

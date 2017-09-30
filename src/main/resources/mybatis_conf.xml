@@ -17,6 +17,7 @@
     </environments>
 
     <mappers>
+        <mapper resource="UserTestMapper.xml" />
         <mapper resource="userMapper.xml" />
         <mapper class="com.qtone.mytest.Mapper.UserMapper"/>
     </mappers>
