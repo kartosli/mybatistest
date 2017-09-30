@@ -2,24 +2,33 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <property name="rowBoundsWithCount" value="true"/>
+        </plugin>
+    </plugins>
+
     <!-- development:开发模式     work:工作模式 -->
     <environments default="development">
         <environment id="development">
-            <transactionManager type="JDBC" />
+            <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/utest" />
-                <property name="username" value="root" />
-                <property name="password" value="" />
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/utest"/>
+                <property name="username" value="root"/>
+                <property name="password" value=""/>
             </dataSource>
         </environment>
     </environments>
-
     <mappers>
-        <mapper resource="UserTestMapper.xml" />
-        <mapper resource="userMapper.xml" />
+        <mapper resource="UserTestMapper.xml"/>
+        <mapper resource="userMapper.xml"/>
         <mapper class="com.qtone.mytest.Mapper.UserMapper"/>
     </mappers>
 
 </configuration>
+

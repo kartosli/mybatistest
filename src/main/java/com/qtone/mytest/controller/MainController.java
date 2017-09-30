@@ -1,5 +1,7 @@
 package com.qtone.mytest.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qtone.mytest.Model.User;
 import com.qtone.mytest.Model.UserTest;
 import com.qtone.mytest.Service.IUserService;
@@ -60,9 +62,26 @@ public class MainController {
     public List<UserTest> toJsonList(User user){
 //        service.addUser(user); //一起测试了
         String username = user.getUsername();
+        String password = user.getPassword();
         Map param = new HashMap();
         param.put("username",username);
+        param.put("password",password);
         List<UserTest> uList = service.findUserList(param);
+
         return uList;
+    }
+
+    @RequestMapping(value ="/toJsonListPage")
+    @ResponseBody
+    public  List<UserTest> toJsonListPage(User user){
+//        service.addUser(user); //一起测试了
+        String username = user.getUsername();
+        Map param = new HashMap();
+        param.put("username",username);
+        PageHelper.startPage(2, 2);
+        List<UserTest> uList = service.findUserList(param);
+        PageInfo<UserTest> users = new PageInfo<UserTest>(uList);
+        List<UserTest> ulist =  users.getList();
+        return ulist;
     }
 }
