@@ -1,6 +1,7 @@
 package com.qtone.mytest.controller;
 
 import com.qtone.mytest.Model.User;
+import com.qtone.mytest.Model.UserTest;
 import com.qtone.mytest.Service.IUserService;
 import com.qtone.mytest.Service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -52,5 +53,16 @@ public class MainController {
         Map res = new HashMap();
         res.put("count",rescount);
         return res;
+    }
+
+    @RequestMapping(value ="/toJsonList")
+    @ResponseBody
+    public List<UserTest> toJsonList(User user){
+//        service.addUser(user); //一起测试了
+        String username = user.getUsername();
+        Map param = new HashMap();
+        param.put("username",username);
+        List<UserTest> uList = service.findUserList(param);
+        return uList;
     }
 }

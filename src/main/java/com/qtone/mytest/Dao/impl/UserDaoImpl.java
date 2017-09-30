@@ -4,6 +4,7 @@ import com.qtone.mytest.Dao.IUserDao;
 import com.qtone.mytest.Mapper.UserMapper;
 import com.qtone.mytest.Mapper.UserTestMapper;
 import com.qtone.mytest.Model.User;
+import com.qtone.mytest.Model.UserTest;
 import com.qtone.mytest.Model.UserTestExample;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 
 public class UserDaoImpl implements IUserDao{
     private SqlSessionFactory sessionFactory;
@@ -52,6 +54,27 @@ public class UserDaoImpl implements IUserDao{
         UserTestExample.Criteria criteria = example.createCriteria();
         int count = uTmapper.countByExample(example);
         return count;
+    }
+
+    public List<UserTest> findUserList(Map<String, Object> param) {
+        UserTestMapper uTmapper = session.getMapper(UserTestMapper.class);
+        String userName = (String)param.get("username");
+        String passWord = (String)param.get("password");
+
+        UserTestExample example = new UserTestExample();
+        UserTestExample.Criteria criteria = example.createCriteria();
+
+        if(null!=userName){
+            criteria.andUsernameEqualTo(userName);
+        }
+        if(null!=passWord){
+            criteria.andPasswordEqualTo(passWord);
+
+        }
+        List<UserTest>list = uTmapper.selectByExample(example);
+
+
+        return list;
     }
 
 
