@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qtone.mytest.Model.User;
 import com.qtone.mytest.Model.UserTest;
+import com.qtone.mytest.Service.ITestUserService;
 import com.qtone.mytest.Service.IUserService;
 import com.qtone.mytest.Service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,9 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+    @Autowired
+    ITestUserService iTestUserService;
+
     private IUserService service = new UserServiceImpl();
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -83,5 +88,14 @@ public class MainController {
         PageInfo<UserTest> users = new PageInfo<UserTest>(uList);
         List<UserTest> ulist =  users.getList();
         return ulist;
+    }
+
+
+    @RequestMapping(value ="/toJsonListIU")
+    @ResponseBody
+    public  List<UserTest> toJsonItestU(User user){
+//        service.addUser(user); //一起测试了
+        List  list =  iTestUserService.findUserList();
+        return list;
     }
 }
